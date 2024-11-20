@@ -23,8 +23,7 @@
 // console.log(strCheck2('проверяемая строка',10));
 
 
-
- // Функция для проверки, является ли строка палиндромом
+// Функция для проверки, является ли строка палиндромом
 
 // let str;
 // const isPalindrom = function(str) {
@@ -45,24 +44,21 @@ function extractDigits(string) {
   let digits = '';
 
   for (let i = 0; i < string.length; i++) {
-      const character = string[i];
+    const character = string[i];
 
-      if (character >= '0' && character <= '9') {
-          digits += character;
-      }
+    if (character >= '0' && character <= '9') {
+      digits += character;
+    }
   }
 
   return digits.length > 0 ? parseInt(digits, 10) : NaN;
 }
 
 // Пример использования
-console.log(extractDigits('2023 год'));            // 2023
-console.log(extractDigits('ECMAScript 2022'));     // 2022
-console.log(extractDigits('1 кефир, 0.5 батона')); // 105
-console.log(extractDigits('агент 007'));           // 7
-console.log(extractDigits('а я томат'));           // NaN
-
-
-
+extractDigits('2023 год'); // 2023
+extractDigits('ECMAScript 2022'); // 2022
+extractDigits('1 кефир, 0.5 батона'); // 105
+extractDigits('агент 007'); // 7
+extractDigits('а я томат'); // NaN
 
 

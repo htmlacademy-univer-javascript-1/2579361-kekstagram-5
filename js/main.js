@@ -61,32 +61,27 @@ function createComments(photoId, commentIndex) {
     name: getRandomName(),
   };
 }
-
-// Функция для создания данных фотографий
+function generateComments(photoId, commentCount) {
+  const comments = [];
+  for (let i = 0; i < commentCount; i++) {
+    comments.push(createComments(photoId, i));
+  }
+  return comments;
+}
 function createPhotoObjects() {
   const photos = [];
   for (let i = 1; i <= 25; i++) {
     const commentCount = getRandomInt(0, 30);
-    const comments = [];
-
-    // Генерируем комментарии прямо здесь
-    for (let j = 0; j < commentCount; j++) {
-      const comment = createComments(i, j);
-      comments.push(comment);
-    }
-
     const photo = {
       id: i,
       url: `photos/${i}.jpg`,
       description: `Описание фотографии номер ${i}: здесь можно увидеть что-то интересное!`,
       likes: getRandomInt(15, 200),
-      comments: comments, // Добавляем сгенерированные комментарии
+      comments: generateComments(i, commentCount),
     };
-
     photos.push(photo);
   }
   return photos;
 }
 
-// Запускаем создание объектов фотографий и выводим результат
 console.log(createPhotoObjects());

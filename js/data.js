@@ -1,5 +1,68 @@
 import { getRandomInt } from "./utils.js";
-import { generateComments } from "./main.js"; // Добавлен импорт generateComments
+
+// Определяем функцию generateComments внутри data.js
+function generateComments(photoId, commentCount) {
+  const comments = [];
+  for (let i = 0; i < commentCount; i++) {
+    comments.push({
+      id: i + 1 + (photoId - 1) * 30,
+      avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
+      message: getRandomCommentMessage(),
+      name: getRandomName(),
+    });
+  }
+  return comments;
+}
+
+function getRandomCommentMessage() {
+  const commentsList = [
+    "Всё отлично!",
+    "В целом всё неплохо. Но не всё.",
+    "Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.",
+    "Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.",
+    "Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.",
+    "Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!",
+  ];
+
+  const selectedComments = [];
+  const randomCount = getRandomInt(1, 2);
+
+  while (selectedComments.length < randomCount) {
+    const randomIndex = getRandomInt(0, commentsList.length - 1);
+    const comment = commentsList[randomIndex];
+    if (!selectedComments.includes(comment)) {
+      selectedComments.push(comment);
+    }
+  }
+
+  return selectedComments.join(" ");
+}
+
+function getRandomName() {
+  const names = [
+    "Анна",
+    "Иван",
+    "Мария",
+    "Дмитрий",
+    "Ольга",
+    "Алексей",
+    "Екатерина",
+    "Сергей",
+    "Елена",
+    "Андрей",
+    "Татьяна",
+    "Михаил",
+    "Юлия",
+    "Павел",
+    "Наталья",
+    "Владимир",
+    "Ксения",
+    "Николай",
+    "Ирина",
+    "Александр",
+  ];
+  return names[getRandomInt(0, names.length - 1)];
+}
 
 export function createPhotoObjects() {
   const photos = [];
@@ -10,7 +73,7 @@ export function createPhotoObjects() {
       url: `photos/${i}.jpg`,
       description: `Описание фотографии номер ${i}: здесь можно увидеть что-то интересное!`,
       likes: getRandomInt(15, 200),
-      comments: generateComments(i, commentCount), // Использование generateComments
+      comments: generateComments(i, commentCount),
     };
     photos.push(photo);
   }

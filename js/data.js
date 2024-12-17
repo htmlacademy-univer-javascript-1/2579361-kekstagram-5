@@ -1,4 +1,5 @@
 import { getRandomInt } from "./utils.js";
+import { generateComments } from "./main.js"; // Добавлен импорт generateComments
 
 export function createPhotoObjects() {
   const photos = [];
@@ -9,7 +10,7 @@ export function createPhotoObjects() {
       url: `photos/${i}.jpg`,
       description: `Описание фотографии номер ${i}: здесь можно увидеть что-то интересное!`,
       likes: getRandomInt(15, 200),
-      comments: generateComments(i, commentCount),
+      comments: generateComments(i, commentCount), // Использование generateComments
     };
     photos.push(photo);
   }

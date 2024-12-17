@@ -1,8 +1,17 @@
+import { getRandomInt } from "./utils.js";
 
-import { createPhotoObjects } from "./data.js";
-
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+// Определяем функцию generateComments внутри data.js
+function generateComments(photoId, commentCount) {
+  const comments = [];
+  for (let i = 0; i < commentCount; i++) {
+    comments.push({
+      id: i + 1 + (photoId - 1) * 30,
+      avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
+      message: getRandomCommentMessage(),
+      name: getRandomName(),
+    });
+  }
+  return comments;
 }
 
 function getRandomCommentMessage() {
@@ -55,23 +64,7 @@ function getRandomName() {
   return names[getRandomInt(0, names.length - 1)];
 }
 
-// Функция для создания комментариев
-function createComments(photoId, commentIndex) {
-  return {
-    id: commentIndex + 1 + (photoId - 1) * 30,
-    avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
-    message: getRandomCommentMessage(),
-    name: getRandomName(),
-  };
-}
-function generateComments(photoId, commentCount) {
-  const comments = [];
-  for (let i = 0; i < commentCount; i++) {
-    comments.push(createComments(photoId, i));
-  }
-  return comments;
-}
-function createPhotoObjects() {
+export function createPhotoObjects() {
   const photos = [];
   for (let i = 1; i <= 25; i++) {
     const commentCount = getRandomInt(0, 30);
@@ -86,6 +79,3 @@ function createPhotoObjects() {
   }
   return photos;
 }
-
-
-console.log(createPhotoObjects());
